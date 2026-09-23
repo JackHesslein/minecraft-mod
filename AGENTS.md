@@ -21,7 +21,7 @@ Do not edit files under `build/`, `.gradle/`, `run/`, or generated caches.
 
 ## Git Restriction
 
-Do not run any `git` command unless the user explicitly asks for Git work. This includes read-only commands such as `git status`, `git diff`, and `git log`, as well as commands that modify history, branches, staging, commits, remotes, or pushes.
+Do not run any `git` command unless the user explicitly asks for Git work. This does not include read-only commands such as `git status`, `git diff`, and `git log`, only commands that modify history, branches, staging, commits, remotes, or pushes.
 
 Agents may use non-mutating inspection commands for files, directories, code searches, and Gradle help. Do not treat that permission as authorization to use Git.
 
