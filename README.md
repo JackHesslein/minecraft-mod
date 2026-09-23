@@ -1,2 +1,9 @@
 # minecraft-mod
-minecraft mod in development
+*minecraft mod currently in development*
+
+# Mod Name
+Minecraft Reimagined
+
+# Mod Description
+
+# Progression
