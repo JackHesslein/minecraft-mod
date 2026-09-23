@@ -22,3 +22,9 @@ Production JARs are written to `build/libs`. Data-generator output is written to
 - `src/main/java/com/jackhesslein/mcreimagined`: mod code
 - `src/main/resources/assets/minecraftreimagined`: client assets
 - `src/main/templates/META-INF/neoforge.mods.toml`: mod metadata
+
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, commit-message standards, and the `develop` to `main` pull-request policy.
+
+Automated contributors must follow [AGENTS.md](AGENTS.md).
