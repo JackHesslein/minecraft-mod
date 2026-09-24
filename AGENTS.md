@@ -29,6 +29,8 @@ Agents may use non-mutating inspection commands for files, directories, code sea
 
 Keep changes small and focused. Use the `minecraftreimagined` namespace for resource and registry IDs.
 
+When registering a new item, including a block item, add it to `ITEMLIST.md`. Update its entry whenever its behavior or important file locations change. Each entry must identify the registry ID and directories relevant to future editing.
+
 Commit messages must be concise, imperative, and specific, such as `Add copper hammer recipe`. Avoid vague messages such as `fix`, `updates`, or `wip`; use a body when rationale or compatibility impact needs explanation.
 
 All work is pushed to `develop`. Never push directly to `main`. Merge `develop` into `main` only through a pull request after the work is stable and the build succeeds.
