@@ -20,14 +20,34 @@ public final class MinecraftReimagined {
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
 
-    public static final DeferredBlock<UpgradedCraftingTableBlock> UPGRADED_CRAFTING_TABLE = BLOCKS.registerBlock(
-            "upgraded_crafting_table",
-            UpgradedCraftingTableBlock::new,
+    public static final DeferredBlock<TierOneCraftingTableBlock> TIER_ONE_CRAFTING_TABLE = BLOCKS.registerBlock(
+            "tier_one_crafting_table",
+            TierOneCraftingTableBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)
     );
-    public static final DeferredItem<BlockItem> UPGRADED_CRAFTING_TABLE_ITEM = ITEMS.registerSimpleBlockItem(
-            "upgraded_crafting_table",
-            UPGRADED_CRAFTING_TABLE
+    public static final DeferredItem<BlockItem> TIER_ONE_CRAFTING_TABLE_ITEM = ITEMS.registerSimpleBlockItem(
+            "tier_one_crafting_table",
+            TIER_ONE_CRAFTING_TABLE
+    );
+
+    public static final DeferredBlock<TierTwoCraftingTableBlock> TIER_TWO_CRAFTING_TABLE = BLOCKS.registerBlock(
+            "tier_two_crafting_table",
+            TierTwoCraftingTableBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)
+    );
+    public static final DeferredItem<BlockItem> TIER_TWO_CRAFTING_TABLE_ITEM = ITEMS.registerSimpleBlockItem(
+            "tier_two_crafting_table",
+            TIER_TWO_CRAFTING_TABLE
+    );
+
+        public static final DeferredBlock<TierThreeCraftingTableBlock> TIER_THREE_CRAFTING_TABLE = BLOCKS.registerBlock(
+            "tier_three_crafting_table",
+            TierThreeCraftingTableBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)
+    );
+    public static final DeferredItem<BlockItem> TIER_THREE_CRAFTING_TABLE_ITEM = ITEMS.registerSimpleBlockItem(
+            "tier_three_crafting_table",
+            TIER_THREE_CRAFTING_TABLE
     );
 
     public MinecraftReimagined(IEventBus modEventBus) {
@@ -39,7 +59,9 @@ public final class MinecraftReimagined {
 
     private void addCreativeTabItems(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            event.accept(UPGRADED_CRAFTING_TABLE_ITEM);
+            event.accept(TIER_ONE_CRAFTING_TABLE_ITEM);
+            event.accept(TIER_TWO_CRAFTING_TABLE_ITEM);
+            event.accept(TIER_THREE_CRAFTING_TABLE_ITEM);
         }
     }
 }

@@ -1,3 +1,5 @@
 {
-  "block.minecraftreimagined.upgraded_crafting_table": "Upgraded Crafting Table"
+  "block.minecraftreimagined.tier_one_crafting_table": "Tier 1 Crafting Table",
+  "block.minecraftreimagined.tier_two_crafting_table": "Tier 2 Crafting Table",
+  "block.minecraftreimagined.tier_three_crafting_table": "Tier 3 Crafting Table"
 }

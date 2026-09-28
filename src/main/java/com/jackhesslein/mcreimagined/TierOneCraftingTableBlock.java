@@ -9,15 +9,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public final class UpgradedCraftingTableBlock extends CraftingTableBlock {
-    public UpgradedCraftingTableBlock(Properties properties) {
+public final class TierOneCraftingTableBlock extends CraftingTableBlock {
+    public TierOneCraftingTableBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider(
-                (containerId, inventory, player) -> new UpgradedCraftingTableMenu(
+                (containerId, inventory, player) -> new TierOneCraftingTableMenu(
                         containerId,
                         inventory,
                         ContainerLevelAccess.create(level, pos)
