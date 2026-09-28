@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "top": "minecraftreimagined:block/upgraded_crafting_table_top",
-    "front": "minecraftreimagined:block/upgraded_crafting_table_front",
-    "side": "minecraftreimagined:block/upgraded_crafting_table_side",
-    "bottom": "minecraftreimagined:block/upgraded_crafting_table_bottom",
-    "particle": "minecraftreimagined:block/upgraded_crafting_table_top"
+    "top": "minecraftreimagined:block/tier_two_crafting_table_top",
+    "front": "minecraftreimagined:block/tier_two_crafting_table_front",
+    "side": "minecraftreimagined:block/tier_two_crafting_table_side",
+    "bottom": "minecraftreimagined:block/tier_two_crafting_table_bottom",
+    "particle": "minecraftreimagined:block/tier_two_crafting_table_top"
   },
   "elements": [
     {
