@@ -1,5 +1,11 @@
 {
   "block.minecraftreimagined.tier_one_crafting_table": "Tier 1 Crafting Table",
   "block.minecraftreimagined.tier_two_crafting_table": "Tier 2 Crafting Table",
-  "block.minecraftreimagined.tier_three_crafting_table": "Tier 3 Crafting Table"
+  "block.minecraftreimagined.tier_three_crafting_table": "Tier 3 Crafting Table",
+  "item.minecraftreimagined.tier_one_upgrade_template": "Tier 1 Upgrade Template",
+  "item.minecraftreimagined.tier_two_upgrade_template": "Tier 2 Upgrade Template",
+  "item.minecraftreimagined.tier_three_upgrade_template": "Tier 3 Upgrade Template",
+  "tooltip.minecraftreimagined.tier_one_upgrade_template": "Sneak + Interact with Crafting Table to Upgrade",
+  "tooltip.minecraftreimagined.tier_two_upgrade_template": "Sneak + Interact with Tier 1 Crafting Table to Upgrade",
+  "tooltip.minecraftreimagined.tier_three_upgrade_template": "Sneak + Interact with Tier 2 Crafting Table to Upgrade"
 }
