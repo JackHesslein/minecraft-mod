@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -34,16 +35,20 @@ public final class MinecraftReimagined {
             "tier_two_crafting_table",
             TierTwoCraftingTableBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)
+                    .sound(SoundType.NETHER_WOOD)
     );
     public static final DeferredItem<BlockItem> TIER_TWO_CRAFTING_TABLE_ITEM = ITEMS.registerSimpleBlockItem(
             "tier_two_crafting_table",
             TIER_TWO_CRAFTING_TABLE
     );
 
-        public static final DeferredBlock<TierThreeCraftingTableBlock> TIER_THREE_CRAFTING_TABLE = BLOCKS.registerBlock(
+    public static final DeferredBlock<TierThreeCraftingTableBlock> TIER_THREE_CRAFTING_TABLE = BLOCKS.registerBlock(
             "tier_three_crafting_table",
             TierThreeCraftingTableBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)
+                    .strength(30.0F, 1200.0F)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()
     );
     public static final DeferredItem<BlockItem> TIER_THREE_CRAFTING_TABLE_ITEM = ITEMS.registerSimpleBlockItem(
             "tier_three_crafting_table",
