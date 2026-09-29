@@ -54,3 +54,13 @@
 - Java: `src/main/java/com/jackhesslein/mcreimagined/` (`MinecraftReimagined.java`, `CraftingTableUpgradeItem.java`)
 - Item model and tooltip: `src/main/resources/assets/minecraftreimagined/models/item/` and `src/main/resources/assets/minecraftreimagined/lang/`
 - Texture: `src/main/resources/assets/minecraftreimagined/textures/item/tier_three_upgrade_template.png`
+
+## Flashbang
+
+- Registry ID: `minecraftreimagined:flashbang`
+- Behavior: Throwable snowball-style item (stack size 16); on impact, spawns 50 `minecraft:flash` particles and 50 bright `minecraft:end_rod` particles within a 5-block radius and plays an explosion sound. Players within 5 blocks take a negligible 0.1 damage, see a solid-white flash for 3 seconds fading over the next second, and hear one loud, continuous 5-second ringing sound. Direct hits on other entities also deal only 0.1 damage. Each wither-boss skull impact has a 15% chance to trigger the particles and a 2-second whiteout with a 2.5-second ringing sound within 5 blocks, alongside the skull's normal damage and explosion. Available in the Combat creative tab.
+- Java: `src/main/java/com/jackhesslein/mcreimagined/` (`MinecraftReimagined.java`, `FlashbangItem.java`, `FlashbangProjectile.java`, `FlashbangEffects.java`, `FlashbangFlashPayload.java`) and `src/main/java/com/jackhesslein/mcreimagined/client/FlashbangOverlay.java`
+- Item model and name: `src/main/resources/assets/minecraftreimagined/models/item/` and `src/main/resources/assets/minecraftreimagined/lang/`
+- Texture: `src/main/resources/assets/minecraftreimagined/textures/item/flashbang.png`
+- Sounds: `src/main/resources/assets/minecraftreimagined/sounds/flashbang_ringing.ogg`, `src/main/resources/assets/minecraftreimagined/sounds/wither_flash_ringing.ogg`, and `src/main/resources/assets/minecraftreimagined/sounds.json`
+- Recipe: `src/main/resources/data/minecraftreimagined/recipe/flashbang.json` — nether star between two netherite ingots vertically in any crafting-table column; yields 16 flashbangs.

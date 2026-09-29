@@ -2,12 +2,17 @@ package com.jackhesslein.mcreimagined;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.projectile.WitherSkull;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -17,12 +22,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
@@ -33,6 +42,15 @@ public final class MinecraftReimagined {
     public static final Logger LOGGER = LogUtils.getLogger();
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
+    private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, MOD_ID);
+    public static final DeferredHolder<SoundEvent, SoundEvent> FLASHBANG_RINGING = SOUNDS.register(
+            "flashbang_ringing",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MOD_ID, "flashbang_ringing"))
+    );
+    public static final DeferredHolder<SoundEvent, SoundEvent> WITHER_FLASH_RINGING = SOUNDS.register(
+            "wither_flash_ringing",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MOD_ID, "wither_flash_ringing"))
+    );
 
     public static final DeferredBlock<TierOneCraftingTableBlock> TIER_ONE_CRAFTING_TABLE = BLOCKS.registerBlock(
             "tier_one_crafting_table",
@@ -80,13 +98,36 @@ public final class MinecraftReimagined {
             "tier_three_upgrade_template",
             () -> new CraftingTableUpgradeItem(new Item.Properties(), "tooltip.minecraftreimagined.tier_three_upgrade_template")
     );
+    public static final DeferredItem<FlashbangItem> FLASHBANG = ITEMS.register(
+            "flashbang",
+            () -> new FlashbangItem(new Item.Properties().stacksTo(16))
+    );
 
     public MinecraftReimagined(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
+        SOUNDS.register(modEventBus);
         modEventBus.addListener(this::addCreativeTabItems);
+        modEventBus.addListener(this::registerPayloads);
         NeoForge.EVENT_BUS.addListener(this::upgradeCraftingTable);
+        NeoForge.EVENT_BUS.addListener(this::flashWitherSkull);
         LOGGER.info("MinecraftReimagined initialized");
+    }
+
+    private void flashWitherSkull(ProjectileImpactEvent event) {
+        if (event.getProjectile() instanceof WitherSkull skull
+                && skull.getOwner() instanceof WitherBoss
+                && skull.level() instanceof ServerLevel level
+                && event.getRayTraceResult().getType() != HitResult.Type.MISS
+                && level.getRandom().nextFloat() < 0.15F) {
+            // The skull's normal hit and explosion still happen after this event.
+            FlashbangEffects.flash(level, event.getRayTraceResult().getLocation(), level.getRandom(), true);
+        }
+    }
+
+    private void registerPayloads(RegisterPayloadHandlersEvent event) {
+        event.registrar("1").playToClient(FlashbangFlashPayload.TYPE, FlashbangFlashPayload.STREAM_CODEC,
+                (payload, context) -> com.jackhesslein.mcreimagined.client.FlashbangOverlay.flash(payload.witherSkull()));
     }
 
     private void upgradeCraftingTable(PlayerInteractEvent.RightClickBlock event) {
@@ -140,6 +181,8 @@ public final class MinecraftReimagined {
             event.accept(TIER_ONE_UPGRADE_TEMPLATE);
             event.accept(TIER_TWO_UPGRADE_TEMPLATE);
             event.accept(TIER_THREE_UPGRADE_TEMPLATE);
+        } else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(FLASHBANG);
         }
     }
 }
