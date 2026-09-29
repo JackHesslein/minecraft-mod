@@ -34,15 +34,15 @@
 ## Tier 1 Upgrade Template
 
 - Registry ID: `minecraftreimagined:tier_one_upgrade_template`
-- Behavior: Sneak + Interact with a vanilla crafting table to replace it with a Tier 1 crafting table; consumes one template unless in creative mode.
-- Java: `src/main/java/com/jackhesslein/mcreimagined/` (`MinecraftReimagined.java`, `CraftingTableUpgradeItem.java`)
+- Behavior: Sneak + Interact with a vanilla crafting table to replace it with a Tier 1 crafting table, releasing double-sized `minecraft:enchant` particles around the table; consumes one template unless in creative mode.
+- Java: `src/main/java/com/jackhesslein/mcreimagined/` (`MinecraftReimagined.java`, `TierOneCraftingTableBlock.java`, `CraftingTableUpgradeItem.java`) and `src/main/java/com/jackhesslein/mcreimagined/client/` (`TierOneUpgradeParticles.java`)
 - Item model and tooltip: `src/main/resources/assets/minecraftreimagined/models/item/` and `src/main/resources/assets/minecraftreimagined/lang/`
 - Texture: `src/main/resources/assets/minecraftreimagined/textures/item/tier_one_upgrade_template.png`
 
 ## Tier 2 Upgrade Template
 
 - Registry ID: `minecraftreimagined:tier_two_upgrade_template`
-- Behavior: Sneak + Interact with a Tier 1 crafting table to replace it with a Tier 2 crafting table; consumes one template unless in creative mode.
+- Behavior: Sneak + Interact with a Tier 1 crafting table to replace it with a Tier 2 crafting table, releasing blaze-like flame particles around the table; consumes one template unless in creative mode.
 - Java: `src/main/java/com/jackhesslein/mcreimagined/` (`MinecraftReimagined.java`, `CraftingTableUpgradeItem.java`)
 - Item model and tooltip: `src/main/resources/assets/minecraftreimagined/models/item/` and `src/main/resources/assets/minecraftreimagined/lang/`
 - Texture: `src/main/resources/assets/minecraftreimagined/textures/item/tier_two_upgrade_template.png`
@@ -50,7 +50,7 @@
 ## Tier 3 Upgrade Template
 
 - Registry ID: `minecraftreimagined:tier_three_upgrade_template`
-- Behavior: Sneak + Interact with a Tier 2 crafting table to replace it with a Tier 3 crafting table; consumes one template unless in creative mode.
+- Behavior: Sneak + Interact with a Tier 2 crafting table to replace it with a Tier 3 crafting table, releasing purple dragon's breath particles around the table; consumes one template unless in creative mode.
 - Java: `src/main/java/com/jackhesslein/mcreimagined/` (`MinecraftReimagined.java`, `CraftingTableUpgradeItem.java`)
 - Item model and tooltip: `src/main/resources/assets/minecraftreimagined/models/item/` and `src/main/resources/assets/minecraftreimagined/lang/`
 - Texture: `src/main/resources/assets/minecraftreimagined/textures/item/tier_three_upgrade_template.png`
