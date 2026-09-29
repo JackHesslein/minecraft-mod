@@ -1,0 +1,18 @@
+{
+  "flashbang_ringing": {
+    "sounds": [
+      {
+        "name": "minecraftreimagined:flashbang_ringing",
+        "stream": true
+      }
+    ]
+  },
+  "wither_flash_ringing": {
+    "sounds": [
+      {
+        "name": "minecraftreimagined:wither_flash_ringing",
+        "stream": true
+      }
+    ]
+  }
+}
