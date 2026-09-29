@@ -2,6 +2,9 @@ package com.jackhesslein.mcreimagined;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -97,12 +100,15 @@ public final class MinecraftReimagined {
         Block current = level.getBlockState(pos).getBlock();
         ItemStack stack = event.getItemStack();
         Block upgrade = null;
+        ParticleOptions upgradeParticle = null;
         if (stack.is(TIER_ONE_UPGRADE_TEMPLATE.get()) && current == Blocks.CRAFTING_TABLE) {
             upgrade = TIER_ONE_CRAFTING_TABLE.get();
         } else if (stack.is(TIER_TWO_UPGRADE_TEMPLATE.get()) && current == TIER_ONE_CRAFTING_TABLE.get()) {
             upgrade = TIER_TWO_CRAFTING_TABLE.get();
+            upgradeParticle = ParticleTypes.FLAME;
         } else if (stack.is(TIER_THREE_UPGRADE_TEMPLATE.get()) && current == TIER_TWO_CRAFTING_TABLE.get()) {
             upgrade = TIER_THREE_CRAFTING_TABLE.get();
+            upgradeParticle = ParticleTypes.DRAGON_BREATH;
         }
 
         if (upgrade == null) {
@@ -111,6 +117,12 @@ public final class MinecraftReimagined {
 
         if (!level.isClientSide()) {
             level.setBlock(pos, upgrade.defaultBlockState(), 3);
+            if (upgrade == TIER_ONE_CRAFTING_TABLE.get()) {
+                level.blockEvent(pos, upgrade, 1, 0);
+            } else {
+                ((ServerLevel) level).sendParticles(upgradeParticle, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
+                        24, 0.65, 0.35, 0.65, 0.02);
+            }
             level.playSound(null, pos, upgrade.defaultBlockState().getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
