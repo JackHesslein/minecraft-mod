@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraftreimagined:item/tier_one_upgrade_template"
+  }
+}
