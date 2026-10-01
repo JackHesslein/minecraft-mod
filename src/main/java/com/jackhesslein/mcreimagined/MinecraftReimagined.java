@@ -1,6 +1,11 @@
 package com.jackhesslein.mcreimagined;
 
+import org.slf4j.Logger;
+
+import com.jackhesslein.mcreimagined.item.ModItems;
+import com.jackhesslein.mcreimagined.progression.ProgressionCommand;
 import com.mojang.logging.LogUtils;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.ParticleOptions;
@@ -24,6 +29,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
@@ -33,15 +39,13 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.fml.common.Mod;
-import org.slf4j.Logger;
 
 @Mod(MinecraftReimagined.MOD_ID)
 public final class MinecraftReimagined {
     public static final String MOD_ID = "minecraftreimagined";
     public static final Logger LOGGER = LogUtils.getLogger();
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
-    private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MOD_ID);
+    private static final DeferredRegister.Items ITEMS = ModItems.ITEMS;
     private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, MOD_ID);
     public static final DeferredHolder<SoundEvent, SoundEvent> FLASHBANG_RINGING = SOUNDS.register(
             "flashbang_ringing",
@@ -105,12 +109,13 @@ public final class MinecraftReimagined {
 
     public MinecraftReimagined(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
-        ITEMS.register(modEventBus);
+        ModItems.register(modEventBus);
         SOUNDS.register(modEventBus);
         modEventBus.addListener(this::addCreativeTabItems);
         modEventBus.addListener(this::registerPayloads);
         NeoForge.EVENT_BUS.addListener(this::upgradeCraftingTable);
         NeoForge.EVENT_BUS.addListener(this::flashWitherSkull);
+        NeoForge.EVENT_BUS.addListener(ProgressionCommand::onCommandRegister);
         LOGGER.info("MinecraftReimagined initialized");
     }
 

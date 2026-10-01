@@ -4,7 +4,7 @@
 
 - Registry ID: `minecraftreimagined:tier_one_crafting_table`
 - Type: Block item for a crafting table that drops when broken by hand or axe; axes mine it faster.
-- Java: `src/main/java/com/jackhesslein/mcreimagined/`
+- Java: `src/main/java/com/jackhesslein/mcreimagined/` (block and block item defined in `MinecraftReimagined.java`; all items registered via `item/ModItems.ITEMS`)
 - Block resources: `src/main/resources/assets/minecraftreimagined/blockstates/` and `src/main/resources/assets/minecraftreimagined/models/block/`
 - Item resources: `src/main/resources/assets/minecraftreimagined/models/item/` and `src/main/resources/assets/minecraftreimagined/lang/`
 - Textures: `src/main/resources/assets/minecraftreimagined/textures/block/`
