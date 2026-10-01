@@ -1,9 +1,9 @@
 package com.jackhesslein.mcreimagined.progression;
 
-import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.core.HolderLookup; 
-import net.minecraft.nbt.CompoundTag; 
-import net.minecraft.server.MinecraftServer; 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.saveddata.SavedData; 
 
 public class ProgressionData extends SavedData {
     private static final String TIER_KEY = "tier";

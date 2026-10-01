@@ -1,18 +1,22 @@
 package com.jackhesslein.mcreimagined;
 
+import org.slf4j.Logger;
+
 import com.jackhesslein.mcreimagined.item.ModItems;
+import com.jackhesslein.mcreimagined.progression.ProgressionCommand;
 import com.mojang.logging.LogUtils;
+
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.fml.common.Mod;
-import org.slf4j.Logger;
 
 @Mod(MinecraftReimagined.MOD_ID)
 public final class MinecraftReimagined {
@@ -35,6 +39,7 @@ public final class MinecraftReimagined {
         ModItems.register(modEventBus);
         modEventBus.addListener(this::addCreativeTabItems);
         LOGGER.info("MinecraftReimagined initialized");
+        NeoForge.EVENT_BUS.addListener(ProgressionCommand::onCommandRegister);
     }
 
     private void addCreativeTabItems(BuildCreativeModeTabContentsEvent event) {
